@@ -2,7 +2,7 @@
 
 ## Requirement
 
-Python 3.8.X. 
+Python 3.8.X.   
 Pytorch 1.X (Cpu or CUDA). 
 
 ## Reference
