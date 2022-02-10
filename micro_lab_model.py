@@ -52,7 +52,7 @@ class Generator(torch.nn.Module):
     def __init__(self, input_dim, num_filter, output_dim):
         super(Generator, self).__init__()
 
-        # Encoder
+        
         self.conv1 = ConvBlock(input_dim, num_filter, activation=False, batch_norm=False)
         self.conv2 = ConvBlock(num_filter, num_filter * 2)
         self.conv3 = ConvBlock(num_filter * 2, num_filter * 4)
@@ -61,7 +61,7 @@ class Generator(torch.nn.Module):
         self.conv6 = ConvBlock(num_filter * 8, num_filter * 8)
         self.conv7 = ConvBlock(num_filter * 8, num_filter * 8)
         self.conv8 = ConvBlock(num_filter * 8, num_filter * 8, batch_norm=False)
-        # Decoder
+        
         self.deconv1 = DeconvBlock(num_filter * 8, num_filter * 8, dropout=True)
         self.deconv2 = DeconvBlock(num_filter * 8 * 2, num_filter * 8, dropout=True)
         self.deconv3 = DeconvBlock(num_filter * 8 * 2, num_filter * 8, dropout=True)
@@ -72,7 +72,7 @@ class Generator(torch.nn.Module):
         self.deconv8 = DeconvBlock(num_filter * 2, output_dim, batch_norm=False)
 
     def forward(self, x):
-        # Encoder
+       
         enc1 = self.conv1(x)
         enc2 = self.conv2(enc1)
         enc3 = self.conv3(enc2)
@@ -81,7 +81,7 @@ class Generator(torch.nn.Module):
         enc6 = self.conv6(enc5)
         enc7 = self.conv7(enc6)
         enc8 = self.conv8(enc7)
-        # Decoder with skip-connections
+       
         dec1 = self.deconv1(enc8)
         dec1 = torch.cat([dec1, enc7], 1)
         dec2 = self.deconv2(dec1)
